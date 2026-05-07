@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BaZi Destiny Reading | I Ching Four Pillars</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            mystic: '#0B0908',
+            gold: '#D4AF37',
+            crimson: '#9D2933',
+            ivory: '#F5F0E1'
+          },
+          fontFamily: {
+            serif: ['"Noto Serif SC"', '"Times New Roman"', 'serif'],
+            sans: ['"Inter"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .text-shadow-gold {
+        text-shadow: 0 0 6px #D4AF37, 0 0 12px rgba(212,175,55,0.4);
+      }
+      .border-gold {
+        border: 1px solid transparent;
+        border-image: linear-gradient(90deg, #D4AF37, transparent, #D4AF37) 1;
+      }
+      .bg-mystic-pattern {
+        background-color: #0B0908;
+        background-image: radial-gradient(rgba(212,175,55,0.08) 1px, transparent 1px);
+        background-size: 40px 40px;
+      }
+      .animate-float {
+        animation: float 4s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-8px); }
+      }
+    }
+  </style>
+</head>
+<body class="bg-mystic-pattern text-ivory font-sans">
+
+<!-- Navigation -->
+<header class="fixed w-full top-0 z-50 bg-mystic/90 backdrop-blur-md border-b border-gold/30">
+  <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+    <div class="flex items-center gap-2">
+      <i class="fa fa-compass text-gold text-2xl animate-float"></i>
+      <h1 class="text-xl md:text-2xl font-serif font-bold text-gold">BaZi Mystic</h1>
+    </div>
+    <nav class="hidden md:flex gap-6 text-sm md:text-base">
+      <a href="#home" class="hover:text-gold transition-colors">Home</a>
+      <a href="#reading" class="hover:text-gold transition-colors">Get Reading</a>
+      <a href="#result" class="hover:text-gold transition-colors">Your Destiny</a>
+      <a href="#contact" class="hover:text-gold transition-colors">Contact</a>
+    </nav>
+    <button id="menuBtn" class="md:hidden text-gold text-xl">
+      <i class="fa fa-bars"></i>
+    </button>
+  </div>
+  <div id="mobileMenu" class="hidden md:hidden bg-mystic/95 border-t border-gold/30">
+    <div class="container mx-auto px-4 py-3 flex flex-col gap-3">
+      <a href="#home" class="py-2 hover:text-gold">Home</a>
+      <a href="#reading" class="py-2 hover:text-gold">Get Reading</a>
+      <a href="#result" class="py-2 hover:text-gold">Your Destiny</a>
+      <a href="#contact" class="py-2 hover:text-gold">Contact</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero Banner -->
+<section id="home" class="min-h-screen flex items-center justify-center pt-20">
+  <div class="container mx-auto px-4 text-center">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl md:text-5xl font-serif font-bold text-gold mb-6 text-shadow-gold">
+        Four Pillars of Destiny
+      </h2>
+      <p class="text-lg md:text-xl opacity-90 mb-8 leading-relaxed">
+        Unlock Your Life Blueprint with Ancient I Ching Wisdom<br>
+        Based on Your Exact Birth Date · BaZi (Eight Characters)
+      </p>
+      <a href="#reading" class="inline-block bg-crimson hover:bg-crimson/90 text-white px-8 py-3 rounded-lg font-semibold transition-all border border-gold/50 shadow-lg shadow-gold/10">
+        Get Your Free Reading <i class="fa fa-arrow-down ml-2"></i>
+      </a>
+      <div class="mt-12 flex justify-center gap-8 text-gold/70">
+        <div class="text-center">
+          <i class="fa fa-calendar text-2xl mb-2"></i>
+          <p class="text-sm">Accurate Birth Chart</p>
+        </div>
+        <div class="text-center">
+          <i class="fa fa-star-o text-2xl mb-2"></i>
+          <p class="text-sm">3-Year Cycle Analysis</p>
+        </div>
+        <div class="text-center">
+          <i class="fa fa-envelope-o text-2xl mb-2"></i>
+          <p class="text-sm">Full Report via Email</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Birth Input Section -->
+<section id="reading" class="py-20 min-h-screen flex items-center justify-center">
+  <div class="container mx-auto px-4">
+    <div class="max-w-xl mx-auto bg-mystic/80 backdrop-blur-sm p-6 md:p-8 rounded-2xl border-gold shadow-xl shadow-gold/5">
+      <div class="text-center mb-8">
+        <i class="fa fa-calendar-check-o text-gold text-3xl mb-4 animate-float"></i>
+        <h3 class="text-2xl md:text-3xl font-serif font-bold text-gold mb-2">Enter Your Birth Details</h3>
+        <p class="opacity-70 text-sm md:text-base">Western Calendar (Gregorian) · Accurate Day Required</p>
+      </div>
+      <form id="birthForm" class="space-y-5">
+        <div>
+          <label class="block mb-2 text-sm font-medium">Birth Year</label>
+          <input type="number" id="year" placeholder="e.g., 1990" min="1900" max="2025" required
+            class="w-full bg-mystic/50 border border-gold/40 rounded-lg px-4 py-3 outline-none focus:border-gold transition-colors text-ivory">
+        </div>
+        <div>
+          <label class="block mb-2 text-sm font-medium">Birth Month (1–12)</label>
+          <input type="number" id="month" placeholder="e.g., 7" min="1" max="12" required
+            class="w-full bg-mystic/50 border border-gold/40 rounded-lg px-4 py-3 outline-none focus:border-gold transition-colors text-ivory">
+        </div>
+        <div>
+          <label class="block mb-2 text-sm font-medium">Birth Day (1–31)</label>
+          <input type="number" id="day" placeholder="e.g., 23" min="1" max="31" required
+            class="w-full bg-mystic/50 border border-gold/40 rounded-lg px-4 py-3 outline-none focus:border-gold transition-colors text-ivory">
+        </div>
+        <div>
+          <label class="block mb-2 text-sm font-medium">Your Email (for Full Report)</label>
+          <input type="email" id="email" placeholder="your@email.com" required
+            class="w-full bg-mystic/50 border border-gold/40 rounded-lg px-4 py-3 outline-none focus:border-gold transition-colors text-ivory">
+        </div>
+        <button type="submit" class="w-full bg-gold hover:bg-gold/90 text-mystic font-bold py-4 rounded-lg transition-all shadow-lg shadow-gold/20">
+          Generate BaZi Reading <i class="fa fa-magic ml-2"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Result Section -->
+<section id="result" class="py-20 min-h-screen hidden">
+  <div class="container mx-auto px-4">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-10">
+        <i class="fa fa-scroll text-gold text-3xl mb-4 animate-float"></i>
+        <h3 class="text-2xl md:text-3xl font-serif font-bold text-gold mb-2">Your BaZi Destiny Analysis</h3>
+        <p id="birthInfo" class="opacity-70"></p>
+      </div>
+
+      <!-- Public Detailed Result (Half: Past & Life Stages) -->
+      <div class="bg-mystic/80 backdrop-blur-sm p-6 md:p-8 rounded-2xl border-gold mb-8 shadow-xl">
+        <h4 class="text-xl md:text-2xl font-serif font-bold text-crimson mb-4 border-b border-gold/30 pb-2">
+          <i class="fa fa-lightbulb-o mr-2"></i> Life Foundation & 3-Year Cycle Analysis (Public)
+        </h4>
+        <div id="publicResult" class="space-y-5 text-sm md:text-base leading-relaxed">
+          <!-- JS will insert detailed content here -->
+        </div>
+      </div>
+
+      <!-- Full Report CTA -->
+      <div class="bg-crimson/10 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-dashed border-gold/60 text-center">
+        <h4 class="text-xl md:text-2xl font-serif font-bold text-gold mb-4">
+          <i class="fa fa-lock mr-2"></i> Full Life Guidance (Private Report)
+        </h4>
+        <p class="mb-6 opacity-90 text-sm md:text-base">
+          The second half of your reading includes: <br>
+          ✅ Future 10-Year Luck Cycles ✅ Career & Wealth Strategy ✅ Love & Marriage Outlook ✅ Health Taboos ✅ Spiritual Remedies & Life Purpose<br>
+          <span class="text-gold font-semibold">Send an email to receive your full report for free.</span>
+        </p>
+        <a id="sendEmailBtn" href="mailto:LYT@qq.com?subject=BaZi Full Reading Request&body=Hello, please send my complete Four Pillars of Destiny report. Birth date: "
+          class="inline-block bg-gold hover:bg-gold/90 text-mystic font-bold px-6 py-3 rounded-lg transition-all shadow-lg">
+          Email for Full Report <i class="fa fa-paper-plane ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-20 bg-mystic/90">
+  <div class="container mx-auto px-4">
+    <div class="max-w-xl mx-auto text-center">
+      <i class="fa fa-envelope text-gold text-3xl mb-4 animate-float"></i>
+      <h3 class="text-2xl md:text-3xl font-serif font-bold text-gold mb-6">Contact</h3>
+      <div class="grid md:grid-cols-4 gap-4 mb-8">
+        <!-- Email -->
+        <div class="p-4 bg-mystic/50 rounded-xl border border-gold/20">
+          <i class="fa fa-envelope text-gold text-xl mb-2"></i>
+          <h4 class="font-semibold mb-1 text-sm">Email</h4>
+          <p class="text-sm">LYT@qq.com</p>
+        </div>
+        <!-- Xiaohongshu / Rednote -->
+        <div class="p-4 bg-mystic/50 rounded-xl border border-gold/20">
+          <!-- 小红书无官方fa图标，用自定义文字+红色风格替代 -->
+          <div class="text-xl mb-2" style="color:#ff2e4d; font-weight:bold;">XHS</div>
+          <h4 class="font-semibold mb-1 text-sm">Xiaohongshu</h4>
+          <a href="https://www.xiaohongshu.com/explore" target="_blank" class="text-sm text-gold hover:underline">@BaZiMystic</a>
+        </div>
+        <!-- Tradition -->
+        <div class="p-4 bg-mystic/50 rounded-xl border border-gold/20">
+          <i class="fa fa-globe text-gold text-xl mb-2"></i>
+          <h4 class="font-semibold mb-1 text-sm">Tradition</h4>
+          <p class="text-sm">I Ching · BaZi</p>
+        </div>
+        <!-- Disclaimer -->
+        <div class="p-4 bg-mystic/50 rounded-xl border border-gold/20">
+          <i class="fa fa-shield text-gold text-xl mb-2"></i>
+          <h4 class="font-semibold mb-1 text-sm">Disclaimer</h4>
+          <p class="text-sm">For Spiritual Guidance Only</p>
+        </div>
+      </div>
+      <p class="opacity-60 text-xs">© 2026 BaZi Mystic · Ancient Chinese Metaphysics · Entertainment Purposes Only</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-4 border-t border-gold/30 text-center opacity-60 text-xs">
+  <p>Four Pillars of Destiny · I Ching · BaZi Mystic</p>
+</footer>
+
+<script>
+  // Mobile menu
+  const menuBtn=document.getElementById('menuBtn');
+  const mobileMenu=document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+  // Form submit
+  const birthForm=document.getElementById('birthForm');
+  const resultSection=document.getElementById('result');
+  const birthInfo=document.getElementById('birthInfo');
+  const publicResult=document.getElementById('publicResult');
+  const sendEmailBtn=document.getElementById('sendEmailBtn');
+
+  birthForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const year=document.getElementById('year').value;
+    const month=document.getElementById('month').value;
+    const day=document.getElementById('day').value;
+    const email=document.getElementById('email').value;
+    const birthStr = `${year}-${month}-${day}`;
+
+    birthInfo.textContent = `Your Birth Date: ${birthStr} (Gregorian)`;
+    generatePublicResult(year, month, day);
+    sendEmailBtn.href = `mailto:LYT@qq.com?subject=BaZi Full Reading - ${birthStr}&body=Dear BaZi Mystic, please send my complete Four Pillars of Destiny (BaZi) report. Birth date: ${birthStr}. Email: ${email}. Thank you.`;
+
+    resultSection.classList.remove('hidden');
+    document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+  });
+
+// Detailed 3-year + life stage analysis (I Ching based)
+function generatePublicResult(year, month, day) {
+  const age = new Date().getFullYear() - parseInt(year);
+  const cycle = 3;
+  let html = `<p><strong>Core BaZi Profile (I Ching & Five Elements)</strong><br>`
+           + `Based on your birth date ${year}-${month}-${day}, your命局 (Destiny Chart) is rooted in the <strong>${getElement(year)}</strong> element, with a <strong>${getYao(month)}</strong> hexagram foundation. Your life follows a <strong>3-year minor cycle</strong> and 7-year major cycle, as defined in the Book of Changes.</p>`;
+
+  // ———— 新增：命格简析（≈200词） ————
+  html += `<p><strong>Destiny Structure & Innate Constitution (命格简析)</strong><br>`
+        + `Your natal chart reveals a <strong>${getConstitution(year,month,day)}</strong> constitution, with your Day Master rooted in <strong>${getElement(day)}</strong> energy, creating a pattern of <strong>${getPattern(year,month)}</strong>. This means you are born with a karmic blueprint that emphasizes <strong>${getKarmaFocus(month)}</strong> in this lifetime. Your elemental balance shows <strong>${getBalance(year,month,day)}</strong>—not overly strong nor weak—granting you adaptability but also vulnerability to environmental shifts. You carry an inherent “${getSpiritualTrait(year)}” quality: you sense cycles, feel collective energy, and often intuit major life turns before they happen. Your life lesson centers on <strong>${getLifeLesson(month)}</strong>: learning to trust your inner compass while grounding yourself in practical reality. This destiny structure gifts you above-average resilience, but it also amplifies emotional sensitivity during transitional ages (especially ages 12, 24, 36, 48).</p>`;
+
+  // ———— 新增：事业运（≈200词） ————
+  html += `<p><strong>Career Potential & Professional Trajectory (事业运)</strong><br>`
+        + `In your BaZi, the <strong>Officer Star (官星)</strong> and <strong>Resource Star (印星)</strong> are well-aligned, indicating you have natural leadership potential and an aptitude for structured growth. Your chart favors careers in <strong>${getCareerFields(month)}</strong>, where systematic thinking and gradual advancement are valued. You thrive in environments with clear hierarchies but also room for independent decision-making. The <strong>10-year luck cycles</strong> show your major career breakthroughs will occur around ages <strong>${getCareerPeaks(year)}</strong>—these periods bring promotions, recognition, or successful transitions to better roles. Your greatest professional strengths are <strong>${getCareerStrengths(month)}</strong>; your main blind spot is <strong>${getCareerWeakness(month)}</strong>, which can cause delays or missed opportunities if unaddressed. Overall, your career path is “steady upward with occasional jumps”—not an overnight success, but one that builds lasting status and respect.</p>`;
+
+  // ———— 新增：财运（≈200词） ————
+  html += `<p><strong>Wealth Blueprint & Financial Cycles (财运)</strong><br>`
+        + `Your wealth chart is governed by <strong>Direct Wealth (正财)</strong> and <strong>Indirect Wealth (偏财)</strong>, with direct wealth stronger in your early-to-middle life, and indirect wealth gaining power after age 35. This means you earn money first through consistent work and salary, then later through investments, side businesses, or passive income. Your “wealth capacity” is above average: you can accumulate assets, but your chart warns against reckless speculation—high-risk trades or get-rich-quick schemes will backfire during weak element years. Major financial gains align with ages <strong>${getWealthPeaks(year)}</strong>; financial caution is needed around ages <strong>${getWealthDangers(month)}</strong>. You have a natural ability to manage resources, but you may struggle with guilt around money or over-giving to others. Your ideal wealth strategy: slow compounding, diversified assets, and avoiding debt during your weaker 3-year cycles.</p>`;
+
+  // ———— 新增：爱情婚姻（≈200词） ————
+  html += `<p><strong>Love, Romance & Marriage Patterns (爱情婚姻)</strong><br>`
+        + `Your relationship destiny is seen in the <strong>Spouse Palace (夫妻宫)</strong> and <strong>Peach Blossom Star (桃花星)</strong>. You are a <strong>${getLoveType(month)}</strong> lover: you crave emotional depth, loyalty, and spiritual connection over superficial attraction. Early relationships (before age 25) are karmic lessons—intense but often unstable—teaching you boundaries and self-worth. Your chart indicates a major romantic turning point around age <strong>${getLovePeak(year)}</strong>, when you meet a partner aligned with your long-term vision. Marriage potential is strong if you choose a partner with complementary elements (avoid <strong>${getLoveClashes(month)}</strong> dominant individuals). Your emotional blind spot: you tend to prioritize your partner’s needs over your own, which can lead to resentment over time. When balanced, you are a deeply devoted, supportive partner capable of building a harmonious, long-lasting union.</p>`;
+
+  // Life stages (I Ching six stages)
+  html += `<p><strong>Life Stage Analysis (Six Yao Phases)</strong><br>`
+        + `0–12: Initial Phase (初爻) – Root building, family influence dominant.<br>`
+        + `12–24: Growth Phase (二爻) – Self-discovery, education & identity.<br>`
+        + `24–36: Challenge Phase (三爻) – Career pressure, relationship tests.<br>`
+        + `36–48: Transition Phase (四爻) – Major life shifts, success or crisis.<br>`
+        + `48–60: Peak Phase (五爻) – Mastery, leadership, legacy building.<br>`
+        + `60+: Reflection Phase (上爻) – Spiritual growth, letting go.</p>`;
+
+  // Past 3-year cycles (detailed)
+  html += `<p><strong>3-Year Cycle Review (Past & Current)</strong></p>`;
+  for (let a = 0; a < age; a += cycle) {
+    const end = Math.min(a + cycle, age);
+    const phase = getPhase(a);
+    const problem = getProblem(a, phase);
+    const element = getCycleElement(a);
+    html += `<p>• Age ${a}–${end}: ${phase} (${element} energy)<br>`
+          + `&nbsp;&nbsp;Key theme: ${getTheme(a)}<br>`
+          + `&nbsp;&nbsp;Main challenges: ${problem}<br>`
+          + `&nbsp;&nbsp;Lesson learned: ${getLesson(a)}</p>`;
+  }
+
+  // Summary
+  html += `<p><strong>Core Personality & Destiny Traits</strong><br>`
+        + `You are a <strong>${getPersonality(month)}</strong> type. Your strengths: ${getStrengths(month)}. Your inherent weaknesses: ${getWeaknesses(month)}. Life path: ${getLifePath(year, month, day)}.</p>`;
+
+  publicResult.innerHTML = html;
+}
+
+// ———— 新增辅助函数（配合上面四段长分析） ————
+function getConstitution(y,m,d){
+  const arr=['balanced earth-water','gentle wood-fire','strong metal-earth','sensitive fire-water','resilient wood-metal'];
+  return arr[(y+m+d)%5];
+}
+function getPattern(y,m){
+  const arr=['wealth-attuned','leadership-focused','spirituality-oriented','creativity-driven','service-centered'];
+  return arr[(y+m)%5];
+}
+function getKarmaFocus(m){
+  const arr=['self-mastery','relationships','career legacy','spiritual growth','creative expression'];
+  return arr[m%5];
+}
+function getBalance(y,m,d){
+  const arr=['slightly fire-heavy','mildly wood-strong','balanced with earth core','metal-leaning stable','water-sensitive'];
+  return arr[(y+m+d)%5];
+}
+function getSpiritualTrait(y){
+  const arr=['intuitive','visionary','grounded','analytical','empathic'];
+  return arr[y%5];
+}
+function getLifeLesson(m){
+  const arr=['trusting self','setting boundaries','embracing change','letting go','valuing self-worth'];
+  return arr[m%5];
+}
+function getCareerFields(m){
+  const arr=['finance, law, management','tech, media, marketing','education, healthcare, non-profit','creative, design, media','consulting, strategy, leadership'];
+  return arr[m%5];
+}
+function getCareerPeaks(y){
+  const arr=['28, 38, 52','25, 35, 45','30, 42, 55','27, 36, 48','32, 40, 50'];
+  return arr[y%5];
+}
+function getCareerStrengths(m){
+  const arr=['discipline & strategy','creativity & communication','empathy & reliability','analysis & precision','vision & leadership'];
+  return arr[m%5];
+}
+function getCareerWeakness(m){
+  const arr=['overthinking','impatience','fear of change','perfectionism','control tendencies'];
+  return arr[m%5];
+}
+function getWealthPeaks(y){
+  const arr=['30, 44, 58','26, 39, 51','33, 45, 57','29, 41, 53','35, 47, 59'];
+  return arr[y%5];
+}
+function getWealthDangers(m){
+  const arr=['24, 37','22, 34','25, 38','23, 36','27, 39'];
+  return arr[m%5];
+}
+function getLoveType(m){
+  const arr=['deep & loyal','passionate & intense','calm & steady','idealistic & romantic','sensitive & devoted'];
+  return arr[m%5];
+}
+function getLovePeak(y){
+  const arr=['27','24','29','26','30'];
+  return arr[y%5];
+}
+function getLoveClashes(m){
+  const arr=['fire','water','metal','wood','earth'];
+  return arr[m%5];
+}
+
+// 保留原有辅助函数不变
+function getElement(y) { const els=['Wood','Fire','Earth','Metal','Water']; return els[y%5]; }
+function getCycleElement(a) { const els=['Wood','Fire','Earth','Metal','Water']; return els[Math.floor(a/3)%5]; }
+function getYao(m) { const ys=['Initial','Second','Third','Fourth','Fifth','Top']; return ys[Math.floor((m-1)/2)]; }
+function getPhase(a) {
+  if (a<12) return 'Foundation'; if (a<24) return 'Growth'; if (a<36) return 'Challenge';
+  if (a<48) return 'Transition'; if (a<60) return 'Peak'; return 'Reflection';
+}
+function getTheme(a) {
+  if (a<3) return 'Birth & Family Bonding'; if (a<6) return 'Early Education & Curiosity'; if (a<9) return 'Childhood Social Adaptation';
+  if (a<12) return 'Pre-teen Identity Formation'; if (a<15) return 'Teen Rebellion & Self-Search'; if (a<18) return 'High School Pressure & Dreams';
+  if (a<21) return 'College Independence'; if (a<24) return 'Early Career Exploration'; if (a<27) return 'Career Stability & Love';
+  if (a<30) return 'Marriage & Responsibility'; if (a<33) return 'Mid-career Burnout'; if (a<36) return 'Major Life Decision';
+  return 'Life Reassessment & Growth';
+}
+function getProblem(a, phase) {
+  if (phase==='Foundation') return 'Insecurity, over-dependence on caregivers, weak immune energy.';
+  if (phase==='Growth') return 'Identity confusion, peer pressure, difficulty choosing life direction.';
+  if (phase==='Challenge') return 'Work stress, relationship conflicts, financial instability, feeling stuck.';
+  if (phase==='Transition') return 'Career crisis, marriage issues, health scares, fear of change.';
+  if (phase==='Peak') return 'Arrogance, control issues, neglect of health, fear of decline.';
+  return 'Loneliness, regret, resistance to aging, spiritual emptiness.';
+}
+function getLesson(a) {
+  if (a<12) return 'Trust & emotional safety'; if (a<24) return 'Self-reliance & authentic choice'; if (a<36) return 'Resilience & boundary-setting';
+  if (a<48) return 'Adaptability & letting go'; if (a<60) return 'Humility & service'; return 'Acceptance & inner peace';
+}
+function getPersonality(m) {
+  const types=['Idealistic & Creative','Passionate & Action-Oriented','Practical & Grounded','Analytical & Disciplined','Intuitive & Empathetic'];
+  return types[m%5];
+}
+function getStrengths(m) {
+  const s=['imaginative, kind, visionary','brave, charismatic, decisive','reliable, patient, hardworking','logical, organized, strategic','wise, compassionate, intuitive'];
+  return s[m%5];
+}
+function getWeaknesses(m) {
+  const w=['overly sensitive, escapist','impulsive, short-tempered','stubborn, resistant to change','cold, overly critical','moody, overly self-sacrificing'];
+  return w[m%5];
+}
+function getLifePath(y, m, d) {
+  const paths=['Creative Expression & Healing','Leadership & Entrepreneurship','Service & Nurturing','Knowledge & Innovation','Spirituality & Connection'];
+  return paths[(y+m+d)%5];
+}
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      mobileMenu.classList.add('hidden');
+    });
+  });
+</script>
+
+</body>
+</html>
